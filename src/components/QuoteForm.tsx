@@ -69,8 +69,8 @@ export default function QuoteForm(props: { compact?: boolean }) {
       <div class="grid gap-4 sm:grid-cols-2">
         <div class="sm:col-span-2">
           <label class="label" for="q-service">What do you need?</label>
-          <select id="q-service" class="field" value={service()} onInput={e => setService(e.currentTarget.value)}>
-            <For each={serviceOptions}>{o => <option value={o.value}>{o.label}</option>}</For>
+          <select id="q-service" class="field" onInput={e => setService(e.currentTarget.value)}>
+            <For each={serviceOptions}>{o => <option value={o.value} selected={o.value === service()}>{o.label}</option>}</For>
           </select>
         </div>
         <div class="sm:col-span-2">

@@ -18,8 +18,8 @@ export default function QuickQuote() {
     <form onSubmit={go} class="grid gap-3 md:grid-cols-[1.6fr_1fr_0.8fr_auto] md:items-end">
       <div>
         <label class="label" for="qq-service">What are you planning?</label>
-        <select id="qq-service" class="field" value={service()} onInput={e => setService(e.currentTarget.value)}>
-          <For each={serviceOptions}>{o => <option value={o.value}>{o.label}</option>}</For>
+        <select id="qq-service" class="field" onInput={e => setService(e.currentTarget.value)}>
+          <For each={serviceOptions}>{o => <option value={o.value} selected={o.value === service()}>{o.label}</option>}</For>
         </select>
       </div>
       <div>
