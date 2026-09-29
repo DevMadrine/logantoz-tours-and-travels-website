@@ -1,0 +1,27 @@
+{
+  "name": "logantoz-tours",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && cp .output/public/404/index.html .output/public/404.html",
+    "start": "node .output/server/index.mjs",
+    "preview": "vite preview",
+    "netlify:deploy": "pnpm build && pnpm --package=netlify-cli dlx netlify deploy --prod --dir .output/public",
+    "netlify:preview": "pnpm build && pnpm --package=netlify-cli dlx netlify deploy --dir .output/public"
+  },
+  "dependencies": {
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^1.0.0",
+    "@solidjs/start": "^2.0.0",
+    "nitro": "^3.0.260610-beta",
+    "solid-js": "^1.9.14",
+    "vite": "^8.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.7",
+    "tailwindcss": "^4.0.7"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

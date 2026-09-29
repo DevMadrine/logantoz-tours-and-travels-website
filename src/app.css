@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sun: #ffde59;
+  --color-sun-deep: #e6c21f;
+  --color-sun-light: #fff3b0;
+  --color-cream: #fffbea;
+  --color-paper: #f6f5f1;
+  --color-ink: #111111;
+  --color-ink-soft: #2a2a2a;
+  --color-stone: #e4e2da;
+  --color-slate: #4d4f5c;
+  --color-savanna: #1e8a5a;
+  --color-ocean: #1f8fe5;
+  --color-coral: #ff5a36;
+  --color-wa: #25d366;
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 1px 2px rgba(20, 20, 10, 0.04), 0 10px 30px -18px rgba(20, 20, 10, 0.18);
+  --shadow-float: 0 8px 30px -12px rgba(20, 20, 10, 0.22);
+  --shadow-sun: 0 8px 20px -10px rgba(214, 178, 0, 0.7);
+  --shadow-sticker: 0 3px 0 0 #000;
+  --shadow-warm: 0 10px 30px -18px rgba(20, 20, 10, 0.2);
+  --radius-frame: 1.25rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: #fff;
+  color: #141414;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img {
+  display: block;
+}
+:focus-visible {
+  outline: 3px solid var(--color-sun-deep);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .wrap {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) { .wrap { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .wrap { padding-inline: 2rem; } }
+
+  /* Headings: heavy Poppins, sentence case, tight. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .display-md {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  /* Yellow marker for one phrase in a heading. */
+  .mark {
+    background: var(--color-sun);
+    color: #000;
+    padding: 0 0.16em;
+    border-radius: 0.15em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.85rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.15;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-sun { background: var(--color-sun); color: #000; box-shadow: var(--shadow-sun); }
+  .btn-sun:hover { background: #ffd83a; }
+  .btn-ink { background: #111; color: #fff; }
+  .btn-ink:hover { background: #2a2a2a; }
+  .btn-white { background: #fff; color: #111; border: 1px solid var(--color-stone); }
+  .btn-white:hover { border-color: #bdbbb2; }
+  .btn-line { border: 1.5px solid currentColor; }
+  .btn-line:hover { background: rgba(0, 0, 0, 0.05); }
+  .bg-ink .btn-line:hover { background: rgba(255, 255, 255, 0.12); }
+  .btn-wa { background: var(--color-wa); color: #000; }
+  .btn-wa:hover { background: #1fbf5b; }
+  .btn-coral { background: var(--color-coral); color: #fff; }
+  .btn-savanna { background: var(--color-savanna); color: #fff; }
+  .btn-ocean { background: var(--color-ocean); color: #fff; }
+  .btn-sm { padding: 0.6rem 1.1rem; font-size: 0.875rem; }
+
+  /* White card on a grey section: the reference's main building block. */
+  .card { background: #fff; border-radius: 1.25rem; box-shadow: var(--shadow-soft); }
+
+  /* Yellow price pill on tour cards. */
+  .sticker {
+    display: inline-block;
+    background: var(--color-sun);
+    color: #000;
+    font-weight: 600;
+    padding: 0.35rem 0.7rem;
+    border-radius: 9999px;
+  }
+
+  /* Pill tabs. */
+  .tab {
+    border-radius: 9999px;
+    padding: 0.55rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: #fff;
+    border: 1px solid var(--color-stone);
+    color: #111;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .tab:hover { border-color: #bdbbb2; }
+  .tab[aria-selected="true"] { background: #111; color: #fff; border-color: #111; }
+
+  /* The deck's rounded diamond photo frame, used on inner page headers. */
+  .diamond-box { position: relative; aspect-ratio: 1 / 1; width: 100%; }
+  .diamond {
+    position: absolute;
+    inset: 15%;
+    overflow: hidden;
+    transform: rotate(45deg);
+    border-radius: var(--radius-frame);
+    background: var(--color-stone);
+  }
+  .diamond > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: rotate(-45deg) scale(1.45);
+  }
+
+  .field {
+    width: 100%;
+    border: 1px solid var(--color-stone);
+    background: #fff;
+    border-radius: 0.85rem;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    line-height: 1.3;
+    color: #111;
+  }
+  .field:focus { outline: none; border-color: #111; box-shadow: 0 0 0 3px rgba(255, 222, 89, 0.5); }
+  .label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem; }
+
+  .prose-basic { font-size: 1.05rem; line-height: 1.75; max-width: 65ch; color: var(--color-slate); }
+  .prose-basic p + p { margin-top: 1rem; }
+  .prose-basic h2 { font-weight: 700; font-size: 1.35rem; margin-top: 2rem; margin-bottom: 0.5rem; color: #111; }
+  .prose-basic ul { list-style: disc; padding-left: 1.4rem; margin-top: 0.5rem; }
+  .prose-basic li + li { margin-top: 0.25rem; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background: var(--color-paper);
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #111;
+  }
+  .bg-ink .chip { background: rgba(255, 255, 255, 0.12); color: #fff; }
+
+  .scroll-x { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; scrollbar-width: thin; }
+  .scroll-x > * { scroll-snap-align: start; flex: 0 0 auto; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise-2 { animation-delay: 0.08s; }
+.rise-3 { animation-delay: 0.16s; }
+.rise-4 { animation-delay: 0.24s; }
+.rise-5 { animation-delay: 0.32s; }

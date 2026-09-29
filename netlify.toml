@@ -1,0 +1,18 @@
+# Netlify build settings for the Logantoz Tours site.
+# The site is fully prerendered, so Netlify only serves static files.
+[build]
+  command = "pnpm build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/_build/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
