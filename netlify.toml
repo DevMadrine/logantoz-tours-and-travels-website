@@ -6,6 +6,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Belt and braces with the preset pinned in vite.config.ts: never let Nitro pick the Netlify preset.
+  NITRO_PRESET = "node-server"
 
 [[headers]]
   for = "/images/*"
