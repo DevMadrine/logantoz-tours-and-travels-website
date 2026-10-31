@@ -1,36 +1,34 @@
+import { A } from "@solidjs/router";
 import { For } from "solid-js";
 import CtaBand from "~/components/CtaBand";
 import DestinationCard from "~/components/DestinationCard";
 import PageHero from "~/components/PageHero";
-import SectionHeading from "~/components/SectionHeading";
 import Seo from "~/components/Seo";
 import { destinations } from "~/data/destinations";
-
-const countries = ["Kenya", "Tanzania", "Uganda"] as const;
 
 export default function Destinations() {
   return (
     <>
-      <Seo title="Destinations" description="Where Logantoz Tours operates: the Maasai Mara, Amboseli, the Rift Valley lakes, the Kenyan coast, Mount Kenya, and across the border into Tanzania and Uganda." />
+      <Seo title="Destinations we drive to" description="Road trips from Nairobi with a Talmar Express driver: the Maasai Mara, Amboseli, the Rift Valley lakes, Tsavo, Samburu, Mount Kenya, Diani and Lamu. Anywhere in Kenya, quoted by distance." />
       <PageHero
-        title="Where we go"
-        intro="Every place below has a trip we run regularly, a driver who knows the road and a lodge we trust. Ask about anywhere not listed."
-        image="/images/destinations/serengeti.jpg"
-        imageAlt="Acacia tree at sunset on the savanna"
-      />
-      <For each={countries}>
-        {(c, i) => (
-          <section class={`py-14 lg:py-20 ${i() % 2 ? "bg-white" : ""}`}>
-            <div class="wrap">
-              <SectionHeading title={c} />
-              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <For each={destinations.filter(d => d.country === c)}>{d => <DestinationCard destination={d} />}</For>
-              </div>
-            </div>
-          </section>
-        )}
-      </For>
-      <CtaBand title="Somewhere else in mind?" body="Rwanda, Ethiopia, South Africa. If it's on the continent we can plan it." service="tour" />
+        title="Where we drive"
+        intro="Part of our transport and transfers service. Every place below is a road trip from Nairobi with a Talmar Express driver, quoted by distance with the driver's costs included. If it is in Kenya and it is not listed, ask; we do not drive outside the country yet."
+        image="/images/destinations/maasai-mara.jpg"
+        imageAlt="Savanna with a lone acacia tree"
+      >
+        <A href="/fleet" class="btn btn-sun">
+          Transport and transfers
+        </A>
+        <A href="/quote?service=transport" class="btn btn-line">
+          Get a quote
+        </A>
+      </PageHero>
+      <section class="wrap py-14 lg:py-20">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <For each={destinations}>{d => <DestinationCard destination={d} />}</For>
+        </div>
+      </section>
+      <CtaBand title="Somewhere else in Kenya?" body="Tell us the place and the dates. We quote the drive, pick the vehicle and sort the stays." service="transport" />
     </>
   );
 }

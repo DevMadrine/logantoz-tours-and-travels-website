@@ -24,22 +24,24 @@
   --radius-frame: 1.25rem;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-body {
-  background: #fff;
-  color: #141414;
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-img {
-  display: block;
-}
-:focus-visible {
-  outline: 3px solid var(--color-sun-deep);
-  outline-offset: 2px;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #fff;
+    color: #141414;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img {
+    display: block;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-sun-deep);
+    outline-offset: 2px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

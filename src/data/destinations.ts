@@ -1,7 +1,7 @@
 export type Destination = {
   slug: string;
   name: string;
-  country: "Kenya" | "Tanzania" | "Uganda";
+  country: "Kenya";
   region: string;
   tagline: string;
   description: string;
@@ -165,48 +165,6 @@ export const destinations: Destination[] = [
     bestTime: "November to March.",
     driveTime: "Flight from Nairobi to Manda Island, then a short boat ride.",
     image: "/images/destinations/lamu.jpg",
-    sample: true,
-  },
-  {
-    slug: "serengeti",
-    name: "Serengeti and Ngorongoro",
-    country: "Tanzania",
-    region: "Northern Tanzania",
-    tagline: "The other side of the migration.",
-    description:
-      "The Serengeti is the Mara's larger neighbour, and the Ngorongoro Crater is a wildlife-packed caldera next to it. Together they make the most complete safari in East Africa.",
-    attractions: ["Central Serengeti", "Ngorongoro Crater", "Calving season in the south", "Olduvai Gorge"],
-    bestTime: "December to March for calving, June to July for the river crossings.",
-    driveTime: "Shuttle to Arusha, then about 5 hours, or fly.",
-    image: "/images/destinations/serengeti.jpg",
-    sample: true,
-  },
-  {
-    slug: "zanzibar",
-    name: "Zanzibar",
-    country: "Tanzania",
-    region: "Indian Ocean",
-    tagline: "Stone Town, spice farms and the north beaches.",
-    description:
-      "An island with a real old town and some of the clearest water on the coast. Pair it with a Serengeti safari or take it on its own for a long weekend.",
-    attractions: ["Stone Town", "Nungwi and Kendwa beaches", "Spice tour", "Prison Island"],
-    bestTime: "June to October and December to February.",
-    driveTime: "Direct flight from Nairobi, about 1.5 hours.",
-    image: "/images/destinations/zanzibar.jpg",
-    sample: true,
-  },
-  {
-    slug: "bwindi",
-    name: "Bwindi",
-    country: "Uganda",
-    region: "South-west Uganda",
-    tagline: "Mountain gorillas in the impenetrable forest.",
-    description:
-      "Roughly half the world's mountain gorillas live in Bwindi. Treks range from one to six hours, and the hour with the family at the end is the point of the trip.",
-    attractions: ["Gorilla trekking", "Lake Bunyonyi", "Batwa cultural walk", "Forest birding"],
-    bestTime: "June to August and December to February.",
-    driveTime: "Fly to Kigali, then about 4 hours by road.",
-    image: "/images/destinations/gorilla.jpg",
     sample: true,
   },
 ];

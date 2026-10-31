@@ -1,52 +1,44 @@
-import { A } from "@solidjs/router";
 import { For } from "solid-js";
+import Audience from "~/components/Audience";
 import CtaBand from "~/components/CtaBand";
-import PageHero from "~/components/PageHero";
 import SectionHeading from "~/components/SectionHeading";
 import Seo from "~/components/Seo";
+import ServiceHero from "~/components/ServiceHero";
 import StayCard from "~/components/StayCard";
 import { stays } from "~/data/stays";
+
+const audience = [
+  { title: "Travellers passing through Nairobi", detail: "A night before an early safari departure, or a bed after a late flight, booked together with your transfer." },
+  { title: "Wedding and conference guests", detail: "We hold a block of rooms in your name, manage the rooming list and run the shuttles to the venue." },
+  { title: "Teams on retreat", detail: "Rooms, meeting space and transport arranged together and invoiced as one." },
+];
 
 export default function Accommodation() {
   return (
     <>
-      <Seo title="Accommodation" description="Partner lodges, tented camps, beach resorts and city hotels across Kenya. Book with a tour or on their own, with transfers if you want them." />
-      <PageHero
-        title="Places to stay"
-        intro="Lodges, camps and hotels we have stayed in ourselves and send guests to every month. Book them as part of a trip or on their own, and we add transfers if you want them."
-        image="/images/stays/tented-camp.jpg"
-        imageAlt="Breakfast table on the deck of a tented camp"
-      >
-        <A href="/quote?service=accommodation" class="btn btn-sun">
-          Book a stay
-        </A>
-      </PageHero>
+      <Seo title="Partner hotels" description="The Nairobi hotels Talmar Express books for travellers and event guests, including Laziz Suites, which it manages. Booked as part of a trip or event." />
+      <ServiceHero
+        title="Partner hotels"
+        intro="These are the hotels we book for travellers passing through Nairobi and for event guests. We reserve them as part of your trip or event and arrange the transfers to match. Lodges and camps inside the parks are chosen with you when we plan a safari."
+        image="/images/brand/toast.jpg"
+        imageAlt="Champagne glasses and a decorated table"
+        chips={["Five Nairobi partners", "Booked with a trip or event", "Group blocks", "Transfers included"]}
+        primary={{ href: "/quote?service=accommodation", label: "Add a hotel to my trip" }}
+      />
 
-      <section class="wrap py-14 lg:py-20">
-        <SectionHeading title="Partner hotels and lodges" intro="Names, photos and rates below are placeholders until Logantoz confirms its partner list." />
-        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          <For each={stays}>{s => <StayCard stay={s} />}</For>
+      <section class="bg-white py-16 lg:py-20">
+        <div class="wrap">
+          <SectionHeading title="Hotels we work with" intro="Named with their permission. Rates are a mix of contracted and public rates, so the quote depends on dates and room type." />
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <For each={stays}>{s => <StayCard stay={s} />}</For>
+          </div>
+          <p class="mt-6 text-slate">Laziz Suites in Parklands is managed by Talmar Express and is a few minutes from our office.</p>
         </div>
       </section>
 
-      <section class="bg-white py-14 lg:py-20">
-        <div class="wrap grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div>
-            <h2 class="text-xl font-bold">Book stays on their own</h2>
-            <p class="mt-2 text-slate">You don't need a tour to book through us. We get group and resident rates most guests can't get direct.</p>
-          </div>
-          <div>
-            <h2 class="text-xl font-bold">Event and group blocks</h2>
-            <p class="mt-2 text-slate">Wedding guests, conference delegates, teams on retreat. We hold rooms, manage the rooming list and run the transfers.</p>
-          </div>
-          <div>
-            <h2 class="text-xl font-bold">Upgrades and alternatives</h2>
-            <p class="mt-2 text-slate">Every tour has a mid-range stay built in. Ask for luxury, budget or family options and we re-quote.</p>
-          </div>
-        </div>
-      </section>
+      <Audience title="Who it's for" items={audience} dark />
 
-      <CtaBand title="Need rooms?" body="Send the dates, the number of guests and the area. We reply with two or three options and prices." service="accommodation" />
+      <CtaBand title="Need rooms for a trip or event?" body="Send the dates, the number of guests and the area. We reply with options and prices." service="accommodation" />
     </>
   );
 }

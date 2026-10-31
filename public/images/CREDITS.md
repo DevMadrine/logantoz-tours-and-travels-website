@@ -1,6 +1,6 @@
 # Image credits
 
-Placeholder photos from Wikimedia Commons, to be replaced by Logantoz Tours' own photography before launch. Keep this file until every placeholder is gone.
+Placeholder photos from Wikimedia Commons, to be replaced by Talmar Express' own photography before launch. Keep this file until every placeholder is gone.
 
 - `destinations/maasai-mara.jpg` — Wildebeest and Thomson gazelle in Maasai Mara, Kenya.jpg by <a href="//commons.wikimedia.org/wiki/User:Daniel_Case" title="User:Daniel Case", CC BY-SA 4.0, via Wikimedia Commons
 - `destinations/maasai-mara-drive.jpg` — Safari in The Maasai Mara (43837384641).jpg by <a rel="nofollow" class="external text" href="https://www.flickr.com/people/2118, CC BY 2.0, via Wikimedia Commons
@@ -30,4 +30,6 @@ Placeholder photos from Wikimedia Commons, to be replaced by Logantoz Tours' own
 - `stays/city-hotel.jpg` — Hilton hotel (Nairobi, Kenya) 02.JPG by Ruslik0, CC BY-SA 4.0, via Wikimedia Commons
 - `events/outdoor-wedding.jpg` — TRADITIONALDANCERS-115.jpg by <a href="//commons.wikimedia.org/wiki/User:Antony_Trivet" title="User:Antony Tri, CC BY-SA 4.0, via Wikimedia Commons
 
-Photos under `brand/` are Logantoz Tours' own, extracted from the company profile PDF (low resolution; request originals).
+Photos under `brand/` are Talmar Express' own, extracted from the company profile PDF (low resolution; request originals).
+
+The Talmar Express emblem (`brand/talmar-logo-original.jpg`, `brand/talmar-mark*.png`) was supplied by the client on 2026-10-31; the mark files are the emblem cut from its wood background.

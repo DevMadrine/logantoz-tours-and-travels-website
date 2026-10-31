@@ -13,10 +13,10 @@ export default function App() {
     <Router
       root={props => (
         <MetaProvider>
-          <Title>Logantoz Tours | Safaris, executive transport and events in Kenya</Title>
+          <Title>Talmar Express | Travel and events in Kenya, from one team</Title>
           <Meta
             name="description"
-            content="Logantoz Tours plans safaris, airport transfers, executive car hire and full event logistics from Nairobi. Plan. Move. Celebrate."
+            content="Talmar Express handles transport and airport transfers, private safaris, partner hotels and events across Kenya from Nairobi. Plan. Move. Celebrate."
           />
           <DraftBanner />
           <Header />

@@ -1,4 +1,4 @@
-# Netlify build settings for the Logantoz Tours site.
+# Netlify build settings for the Talmar Express site.
 # The site is fully prerendered, so Netlify only serves static files.
 [build]
   command = "pnpm build"

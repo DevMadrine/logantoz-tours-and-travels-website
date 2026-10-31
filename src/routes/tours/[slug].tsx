@@ -8,8 +8,8 @@ import SectionHeading from "~/components/SectionHeading";
 import Seo from "~/components/Seo";
 import TourCard from "~/components/TourCard";
 import { getDestination } from "~/data/destinations";
-import { kes, waLink } from "~/data/site";
-import { getTour, tours } from "~/data/tours";
+import { waLink } from "~/data/site";
+import { getTour, tours, tourTerms } from "~/data/tours";
 
 export default function TourPage() {
   const params = useParams();
@@ -125,16 +125,16 @@ export default function TourPage() {
                 </div>
                 <div>
                   <dt class="text-xl font-bold">When it runs</dt>
-                  <dd class="mt-2 text-slate">{t().dates}</dd>
+                  <dd class="mt-2 text-slate">{tourTerms.departures}</dd>
                 </div>
               </dl>
             </div>
 
             <aside class="lg:col-span-4">
               <div class="sticky top-24 card p-6">
-                <p class="text-sm text-slate">From</p>
-                <p class="display-md text-4xl">{kes(t().priceFrom)}</p>
-                <p class="mt-1 text-xs text-slate">{t().priceNote}</p>
+                <p class="text-sm text-slate">Price</p>
+                <p class="display-md text-2xl">Quoted for your group</p>
+                <p class="mt-1 text-xs text-slate">{tourTerms.pricing}</p>
                 <ul class="mt-5 space-y-2 border-t border-stone pt-5 text-[15px]">
                   <li class="flex items-center gap-2">
                     <IconClock /> {duration(t())}
@@ -143,13 +143,13 @@ export default function TourPage() {
                     <IconUsers /> {t().groupSize.min} to {t().groupSize.max} people
                   </li>
                   <li class="flex items-start gap-2">
-                    <IconCalendar class="mt-0.5 shrink-0" /> {t().dates}
+                    <IconCalendar class="mt-0.5 shrink-0" /> Your dates, private departure
                   </li>
                 </ul>
                 <A href={`/quote?service=tour&item=${encodeURIComponent(t().name)}`} class="btn btn-sun mt-6 w-full">
                   Request this trip
                 </A>
-                <a href={waLink(`Hi Logantoz, I'm interested in the ${t().name}.`)} class="btn btn-line mt-2 w-full" target="_blank" rel="noopener">
+                <a href={waLink(`Hi Talmar Express, I'm interested in the ${t().name}.`)} class="btn btn-line mt-2 w-full" target="_blank" rel="noopener">
                   <IconWhatsApp width={18} height={18} /> Ask on WhatsApp
                 </a>
               </div>

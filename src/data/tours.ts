@@ -1,4 +1,4 @@
-export type TourCategory = "safari" | "beach" | "adventure" | "day-trip" | "beyond-kenya";
+export type TourCategory = "safari" | "beach" | "adventure" | "day-trip";
 
 export type Tour = {
   slug: string;
@@ -8,8 +8,6 @@ export type Tour = {
   destinationSlugs: string[];
   days: number;
   nights: number;
-  priceFrom: number;
-  priceNote: string;
   image: string;
   featured?: boolean;
   highlights: string[];
@@ -19,8 +17,8 @@ export type Tour = {
   accommodation: string;
   transport: string;
   activities: string[];
-  dates: string;
   groupSize: { min: number; max: number };
+  /** Itineraries are indicative until the client confirms his actual packages. */
   sample: true;
 };
 
@@ -29,13 +27,16 @@ export const categoryLabels: Record<TourCategory, string> = {
   beach: "Beach",
   adventure: "Adventure",
   "day-trip": "Day trips",
-  "beyond-kenya": "Beyond Kenya",
 };
 
-const std = {
-  priceNote: "Per person sharing, Kenyan resident rate. Non-resident and single rates on request.",
-  excludedBase: ["Drinks, tips and personal spending", "Travel insurance", "Anything not listed under what's included"],
+/** Applies to every trip: private departures, quoted per group, park fees included, own driver-guides. */
+export const tourTerms = {
+  pricing: "Every trip is quoted for your group and dates, in Kenyan shillings. Park entry fees are always included.",
+  departures: "Private trips on your dates. No fixed group departures.",
+  guides: "Our own driver-guides, in vehicles we check ourselves.",
 };
+
+const excludedBase = ["Drinks, tips and personal spending", "Travel insurance", "Anything not listed under what's included"];
 
 export const tours: Tour[] = [
   {
@@ -46,8 +47,6 @@ export const tours: Tour[] = [
     destinationSlugs: ["maasai-mara"],
     days: 3,
     nights: 2,
-    priceFrom: 48500,
-    priceNote: std.priceNote,
     image: "/images/destinations/maasai-mara-drive.jpg",
     featured: true,
     highlights: ["Four game drives in a pop-up roof 4x4", "Optional Maasai village visit", "Migration crossings July to October"],
@@ -56,12 +55,11 @@ export const tours: Tour[] = [
       { day: 2, title: "Full day in the reserve", detail: "Morning and afternoon drives with a picnic lunch by the Mara River. Optional balloon flight at dawn." },
       { day: 3, title: "Last drive and return", detail: "Sunrise drive, breakfast, drive back to Nairobi arriving late afternoon." },
     ],
-    included: ["Transport in a 4x4 safari Land Cruiser with driver-guide", "Two nights full board", "Park entry fees", "Game drives as listed", "Bottled water in the vehicle"],
-    excluded: ["Balloon safari (about USD 450)", "Maasai village visit (about KES 3,000)", ...std.excludedBase],
+    included: ["Transport in a 4x4 safari vehicle with driver-guide", "Two nights full board", "Park entry fees", "Game drives as listed", "Bottled water in the vehicle"],
+    excluded: ["Balloon safari", "Maasai village visit", ...excludedBase],
     accommodation: "Mid-range tented camp on the reserve edge. Lodge upgrade available.",
-    transport: "Toyota Land Cruiser 4x4 with pop-up roof, 7 seats.",
+    transport: "Toyota Land Cruiser 4x4 with pop-up roof.",
     activities: ["Game drives", "Sunrise photography", "Maasai cultural visit", "Balloon safari (optional)"],
-    dates: "Departs Nairobi every Friday. Private departures any day.",
     groupSize: { min: 2, max: 7 },
     sample: true,
   },
@@ -73,8 +71,6 @@ export const tours: Tour[] = [
     destinationSlugs: ["amboseli"],
     days: 2,
     nights: 1,
-    priceFrom: 32000,
-    priceNote: std.priceNote,
     image: "/images/destinations/amboseli.jpg",
     featured: true,
     highlights: ["Clearest Kilimanjaro views at dawn", "Observation Hill lookout", "Large elephant families"],
@@ -83,11 +79,10 @@ export const tours: Tour[] = [
       { day: 2, title: "Dawn drive and return", detail: "Early drive for the mountain views, breakfast, return to Nairobi by mid-afternoon." },
     ],
     included: ["4x4 transport with driver-guide", "One night full board", "Park entry fees", "Game drives as listed"],
-    excluded: [...std.excludedBase],
+    excluded: [...excludedBase],
     accommodation: "Safari lodge inside the park.",
     transport: "Toyota Land Cruiser 4x4 or Prado depending on group size.",
     activities: ["Game drives", "Observation Hill walk", "Photography"],
-    dates: "Any day on request. Best views June to October and January to February.",
     groupSize: { min: 2, max: 7 },
     sample: true,
   },
@@ -99,8 +94,6 @@ export const tours: Tour[] = [
     destinationSlugs: ["lake-nakuru", "lake-naivasha", "hells-gate"],
     days: 2,
     nights: 1,
-    priceFrom: 27500,
-    priceNote: std.priceNote,
     image: "/images/destinations/lake-nakuru.jpg",
     featured: true,
     highlights: ["Rhino sanctuary at Nakuru", "Boat ride on Naivasha", "Cycling with zebras at Hell's Gate"],
@@ -109,37 +102,33 @@ export const tours: Tour[] = [
       { day: 2, title: "Naivasha and Hell's Gate", detail: "Morning boat ride and Crescent Island walk, then cycle Hell's Gate gorge. Back in Nairobi by evening." },
     ],
     included: ["Transport with driver-guide", "One night half board", "Park fees for Nakuru and Hell's Gate", "Boat ride", "Bicycle hire"],
-    excluded: ["Crescent Island entry (about KES 1,500)", ...std.excludedBase],
+    excluded: ["Crescent Island entry", ...excludedBase],
     accommodation: "Lakeside lodge at Naivasha.",
     transport: "Toyota Prado or Hiace shuttle depending on group size.",
     activities: ["Game drive", "Boat ride", "Walking safari", "Cycling", "Gorge walk"],
-    dates: "Every weekend, Saturday departure. Weekday departures on request.",
     groupSize: { min: 2, max: 14 },
     sample: true,
   },
   {
     slug: "nairobi-in-a-day",
-    name: "Nairobi in a day",
+    name: "Nairobi city tour",
     tagline: "Lions before breakfast, giraffes by lunch, Karen Blixen after. The city's wild side without leaving town.",
     category: "day-trip",
     destinationSlugs: ["nairobi"],
     days: 1,
     nights: 0,
-    priceFrom: 8500,
-    priceNote: "Per person, minimum two. Hotel pick-up in Nairobi included.",
     image: "/images/destinations/nairobi-park.jpg",
     featured: true,
     highlights: ["Nairobi National Park at opening time", "Giraffe Centre", "Karen Blixen Museum"],
     itinerary: [
-      { day: 1, title: "The full loop", detail: "6am pick-up, three-hour game drive, Giraffe Centre, lunch in Karen, Karen Blixen Museum, optional Kazuri beads or Bomas of Kenya, drop-off by 5pm." },
+      { day: 1, title: "The full loop", detail: "6am hotel pick-up, three-hour game drive, Giraffe Centre, lunch in Karen, Karen Blixen Museum, optional Kazuri beads or Bomas of Kenya, drop-off by 5pm." },
     ],
     included: ["Private vehicle with driver-guide", "Hotel pick-up and drop-off", "Park and centre entry fees"],
-    excluded: ["Lunch", "Bomas of Kenya show", ...std.excludedBase],
-    accommodation: "Not included. We can add a Nairobi hotel.",
+    excluded: ["Lunch", "Bomas of Kenya show", ...excludedBase],
+    accommodation: "Not included. We can add a partner hotel in Nairobi.",
     transport: "Prado or Land Cruiser for the park section.",
     activities: ["Game drive", "Giraffe feeding", "Museum visit", "Shopping stop"],
-    dates: "Daily.",
-    groupSize: { min: 2, max: 7 },
+    groupSize: { min: 1, max: 7 },
     sample: true,
   },
   {
@@ -150,23 +139,19 @@ export const tours: Tour[] = [
     destinationSlugs: ["diani"],
     days: 4,
     nights: 3,
-    priceFrom: 58000,
-    priceNote: std.priceNote,
     image: "/images/destinations/diani.jpg",
-    featured: true,
-    highlights: ["SGR train from Nairobi", "Beachfront resort", "Optional Wasini dhow and snorkelling day"],
+    highlights: ["SGR train from Nairobi", "Beachfront hotel", "Optional Wasini dhow and snorkelling day"],
     itinerary: [
-      { day: 1, title: "Train to the coast", detail: "Morning SGR from Nairobi, transfer from Mombasa to Diani, afternoon on the beach." },
+      { day: 1, title: "Train to the coast", detail: "Transfer to the Nairobi SGR terminus, morning train, transfer from Mombasa to Diani, afternoon on the beach." },
       { day: 2, title: "Free day", detail: "Beach, pool or a spa. Optional Shimba Hills or Wasini Island excursions." },
       { day: 3, title: "Ocean day", detail: "Optional dhow trip to Kisite marine park with snorkelling and a seafood lunch." },
-      { day: 4, title: "Back to Nairobi", detail: "Late checkout, transfer to Mombasa, afternoon SGR to Nairobi." },
+      { day: 4, title: "Back to Nairobi", detail: "Late checkout, transfer to Mombasa, afternoon SGR to Nairobi, transfer home." },
     ],
-    included: ["SGR economy tickets both ways", "All transfers", "Three nights bed and breakfast at a beach resort"],
-    excluded: ["Lunches and dinners", "Excursions", ...std.excludedBase],
-    accommodation: "Four-star beachfront resort in Diani. Boutique and family options available.",
-    transport: "SGR train plus private transfers at the coast.",
+    included: ["SGR tickets both ways", "All transfers, including to and from the Nairobi terminus", "Three nights bed and breakfast"],
+    excluded: ["Lunches and dinners", "Excursions", ...excludedBase],
+    accommodation: "Beachfront hotel in Diani, chosen with you.",
+    transport: "SGR train plus private transfers at both ends.",
     activities: ["Beach", "Snorkelling", "Dhow sailing", "Spa"],
-    dates: "Any day. Best weather August to March.",
     groupSize: { min: 2, max: 20 },
     sample: true,
   },
@@ -178,8 +163,6 @@ export const tours: Tour[] = [
     destinationSlugs: ["tsavo"],
     days: 3,
     nights: 2,
-    priceFrom: 44000,
-    priceNote: std.priceNote,
     image: "/images/destinations/tsavo.jpg",
     highlights: ["Red-dust elephants of Tsavo East", "Mzima Springs underwater hippo viewing", "Shetani lava flow"],
     itinerary: [
@@ -188,11 +171,10 @@ export const tours: Tour[] = [
       { day: 3, title: "Return", detail: "Dawn drive, then the road back to Nairobi via Mtito Andei." },
     ],
     included: ["4x4 transport with driver-guide", "Two nights full board", "Park fees for both parks", "Game drives as listed"],
-    excluded: [...std.excludedBase],
+    excluded: [...excludedBase],
     accommodation: "Safari lodges in each park.",
     transport: "Toyota Land Cruiser 4x4.",
     activities: ["Game drives", "Springs walk", "Lava flow visit"],
-    dates: "Any day on request.",
     groupSize: { min: 2, max: 7 },
     sample: true,
   },
@@ -204,8 +186,6 @@ export const tours: Tour[] = [
     destinationSlugs: ["samburu"],
     days: 3,
     nights: 2,
-    priceFrom: 52000,
-    priceNote: std.priceNote,
     image: "/images/destinations/samburu.jpg",
     highlights: ["Ewaso Nyiro river elephants", "Samburu cultural visit", "Quieter than the Mara"],
     itinerary: [
@@ -214,11 +194,10 @@ export const tours: Tour[] = [
       { day: 3, title: "Return", detail: "Morning drive, then back to Nairobi." },
     ],
     included: ["4x4 transport with driver-guide", "Two nights full board", "Park entry fees", "Game drives as listed"],
-    excluded: ["Village visit", ...std.excludedBase],
+    excluded: ["Village visit", ...excludedBase],
     accommodation: "Riverside lodge in the reserve.",
     transport: "Toyota Land Cruiser 4x4.",
     activities: ["Game drives", "Cultural visit", "Bird watching"],
-    dates: "Any day on request.",
     groupSize: { min: 2, max: 7 },
     sample: true,
   },
@@ -230,8 +209,6 @@ export const tours: Tour[] = [
     destinationSlugs: ["mount-kenya"],
     days: 5,
     nights: 4,
-    priceFrom: 72000,
-    priceNote: "Per person, group of four or more. Includes guide, cook and porters.",
     image: "/images/destinations/mount-kenya.jpg",
     highlights: ["Point Lenana, 4,985m", "Lake Michaelson and the Gorges Valley", "Full mountain crew"],
     itinerary: [
@@ -242,69 +219,11 @@ export const tours: Tour[] = [
       { day: 5, title: "Return", detail: "Walk out to Chogoria gate and drive back to Nairobi." },
     ],
     included: ["Transport from Nairobi", "Park fees and camping fees", "Guide, cook and porters", "All meals on the mountain", "Tents and mattresses"],
-    excluded: ["Sleeping bag hire", "Personal kit", ...std.excludedBase],
+    excluded: ["Sleeping bag hire", "Personal kit", ...excludedBase],
     accommodation: "Mountain huts and tents.",
     transport: "Hiace shuttle to and from the gates.",
     activities: ["Trekking", "Summit hike", "Camping"],
-    dates: "Monthly group departures. Private dates on request.",
     groupSize: { min: 2, max: 12 },
-    sample: true,
-  },
-  {
-    slug: "serengeti-zanzibar",
-    name: "Serengeti and Zanzibar",
-    tagline: "Endless plains, then Stone Town and the beach. Kenya's neighbour done properly.",
-    category: "beyond-kenya",
-    destinationSlugs: ["serengeti", "zanzibar"],
-    days: 7,
-    nights: 6,
-    priceFrom: 195000,
-    priceNote: "Per person sharing, East African resident rate. Flights quoted separately.",
-    image: "/images/destinations/serengeti.jpg",
-    highlights: ["Central Serengeti game drives", "Ngorongoro Crater", "Three nights in Zanzibar"],
-    itinerary: [
-      { day: 1, title: "Nairobi to Arusha", detail: "Shuttle across the Namanga border, overnight in Arusha." },
-      { day: 2, title: "Ngorongoro Crater", detail: "Full crater descent, overnight on the rim." },
-      { day: 3, title: "Serengeti", detail: "Drive into the Serengeti with game viewing en route." },
-      { day: 4, title: "Serengeti", detail: "Full day of game drives." },
-      { day: 5, title: "Fly to Zanzibar", detail: "Light aircraft to Zanzibar, Stone Town walk." },
-      { day: 6, title: "Beach day", detail: "Nungwi or Kendwa beach, optional spice tour." },
-      { day: 7, title: "Home", detail: "Fly Zanzibar to Nairobi." },
-    ],
-    included: ["Safari vehicle and guide in Tanzania", "All park and crater fees", "Six nights accommodation, full board on safari", "Stone Town tour"],
-    excluded: ["Flights", "Visa fees", ...std.excludedBase],
-    accommodation: "Safari lodges and a beach hotel in Zanzibar.",
-    transport: "Shuttle, 4x4 safari vehicle and light aircraft.",
-    activities: ["Game drives", "Crater visit", "Beach", "Stone Town walk"],
-    dates: "Set departures in February, July and October. Private dates on request.",
-    groupSize: { min: 2, max: 12 },
-    sample: true,
-  },
-  {
-    slug: "gorillas-bwindi",
-    name: "Gorilla trekking in Bwindi",
-    tagline: "An hour with a mountain gorilla family. The trip people talk about for years.",
-    category: "beyond-kenya",
-    destinationSlugs: ["bwindi"],
-    days: 4,
-    nights: 3,
-    priceFrom: 165000,
-    priceNote: "Per person sharing, excluding the gorilla permit (USD 800 for non-residents).",
-    image: "/images/destinations/gorilla.jpg",
-    highlights: ["One gorilla trek permit", "Lake Bunyonyi", "Flights Nairobi to Kigali"],
-    itinerary: [
-      { day: 1, title: "Nairobi to Bwindi", detail: "Fly to Kigali, road transfer across the border to Bwindi." },
-      { day: 2, title: "Gorilla trek", detail: "Briefing at 7am, trek to your assigned family, afternoon to rest." },
-      { day: 3, title: "Lake Bunyonyi", detail: "Drive to the lake, canoe ride and a relaxed evening." },
-      { day: 4, title: "Home", detail: "Transfer to Kigali and fly to Nairobi." },
-    ],
-    included: ["Ground transport in Uganda", "Three nights full board", "Lake Bunyonyi canoe ride", "Border assistance"],
-    excluded: ["Gorilla permit", "Flights", "Visas", ...std.excludedBase],
-    accommodation: "Forest lodge near Bwindi and a lakeside lodge at Bunyonyi.",
-    transport: "Flights plus 4x4 in Uganda.",
-    activities: ["Gorilla trekking", "Canoeing", "Forest walk"],
-    dates: "Permit-dependent. Book at least two months ahead.",
-    groupSize: { min: 2, max: 8 },
     sample: true,
   },
 ];

@@ -2,7 +2,7 @@ import LegalPage from "~/components/LegalPage";
 
 export default function Cancellation() {
   return (
-    <LegalPage title="Cancellation and refunds" description="What you get back if you cancel a tour, transfer, stay or event with Logantoz Tours.">
+    <LegalPage title="Cancellation and refunds" description="What you get back if you cancel a tour, transfer, stay or event with Talmar Express.">
       <h2>Tours and accommodation</h2>
       <p>Measured from the start date, in days before departure:</p>
       <ul>
@@ -28,7 +28,7 @@ export default function Cancellation() {
       <h2>If we cancel</h2>
       <p>If we cancel for a reason within our control you get a full refund or a comparable alternative, your choice. If we cancel for reasons outside our control (weather, civil unrest, park closures, government orders) we refund what we can recover from suppliers and offer a credit for the rest.</p>
       <h2>How refunds are paid</h2>
-      <p>By M-Pesa or bank transfer to the account the booking was paid from, within 14 working days of the cancellation being confirmed in writing.</p>
+      <p>By M-Pesa to the number the booking was paid from, within 14 working days of the cancellation being confirmed in writing.</p>
     </LegalPage>
   );
 }

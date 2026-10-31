@@ -1,6 +1,5 @@
 import { A } from "@solidjs/router";
 import { For } from "solid-js";
-import { kes } from "~/data/site";
 import type { Vehicle } from "~/data/fleet";
 import { IconUsers } from "./Icons";
 import SampleTag from "./SampleTag";
@@ -31,14 +30,9 @@ export default function VehicleCard(props: { vehicle: Vehicle }) {
         </ul>
         <p class="mt-4 text-sm text-slate">Good for {props.vehicle.bestFor.join(", ")}.</p>
         <div class="mt-auto flex flex-wrap items-end justify-between gap-3 pt-5">
-          <div>
-            <p class="text-2xl font-bold">
-              {kes(props.vehicle.rateDay)} <span class="text-sm font-medium text-slate">per day</span>
-            </p>
-            <p class="text-xs text-slate">{props.vehicle.rateNote}</p>
-          </div>
-          <A href={`/quote?service=transport&item=${encodeURIComponent(props.vehicle.name)}`} class="btn btn-ink btn-sm">
-            Book this vehicle
+          <p class="text-sm text-slate">Day rate quoted per trip. Driver and fuel included.</p>
+          <A href={`/quote?service=transport&item=${encodeURIComponent(props.vehicle.name)}`} class="btn btn-sun btn-sm">
+            Get a quote
           </A>
         </div>
       </div>

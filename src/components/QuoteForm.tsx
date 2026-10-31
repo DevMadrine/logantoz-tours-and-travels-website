@@ -1,13 +1,13 @@
 import { useSearchParams } from "@solidjs/router";
-import { createSignal, For, onMount, Show } from "solid-js";
+import { createSignal, For, Show } from "solid-js";
 import { site, waLink } from "~/data/site";
 import { IconWhatsApp } from "./Icons";
 
 export const serviceOptions = [
-  { value: "tour", label: "Safari or tour package" },
-  { value: "transport", label: "Vehicle hire or airport transfer" },
-  { value: "event", label: "Event: catering, sound and DJ, transport" },
-  { value: "accommodation", label: "Hotel or lodge booking" },
+  { value: "transport", label: "Airport transfer or vehicle hire" },
+  { value: "tour", label: "Safari or private trip" },
+  { value: "event", label: "Event: catering, transport, sound, décor" },
+  { value: "accommodation", label: "Hotel for a trip or event" },
   { value: "other", label: "Something else" },
 ];
 
@@ -17,33 +17,36 @@ const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v
  * Quote request. Version one has no server: it composes the request into a
  * WhatsApp message (and an email fallback). Wire a server action here when the
  * client confirms where enquiries should land.
+ *
+ * Pages render this with clientOnly(): the site is prerendered, and hydrating a
+ * form against static HTML keeps the empty prerendered field values instead of
+ * the URL-derived ones. Rendering it on the client only avoids that.
  */
 export default function QuoteForm(props: { compact?: boolean }) {
   const [params] = useSearchParams();
-  const [service, setService] = createSignal(first(params.service) || "tour");
-  const [item, setItem] = createSignal(first(params.item));
-  const [date, setDate] = createSignal(first(params.date));
-  const [pax, setPax] = createSignal(first(params.pax) || "2");
+  // Prerendered pages hydrate before the router has read the query string, so on the client read it from the URL directly.
+  const fromUrl = (key: string) => {
+    if (typeof window !== "undefined") {
+      const v = new URLSearchParams(window.location.search).get(key);
+      if (v) return v;
+    }
+    return first(params[key]);
+  };
+  const [service, setService] = createSignal(fromUrl("service") || "transport");
+  const [item, setItem] = createSignal(fromUrl("item"));
+  const [date, setDate] = createSignal(fromUrl("date"));
+  const [pax, setPax] = createSignal(fromUrl("pax") || "2");
   const [name, setName] = createSignal("");
   const [phone, setPhone] = createSignal("");
   const [email, setEmail] = createSignal("");
   const [message, setMessage] = createSignal("");
   const [sent, setSent] = createSignal(false);
 
-  // On a prerendered page the router hydrates without the query string, so read it from the browser directly.
-  onMount(() => {
-    const q = new URLSearchParams(window.location.search);
-    if (q.get("service")) setService(q.get("service")!);
-    if (q.get("item")) setItem(q.get("item")!);
-    if (q.get("date")) setDate(q.get("date")!);
-    if (q.get("pax")) setPax(q.get("pax")!);
-  });
-
   const serviceLabel = () => serviceOptions.find(o => o.value === service())?.label ?? service();
 
   const text = () =>
     [
-      `Hi Logantoz, I'd like a quote.`,
+      `Hi Talmar Express, I'd like a quote.`,
       `Name: ${name()}`,
       `Phone: ${phone()}`,
       email() && `Email: ${email()}`,
@@ -75,7 +78,7 @@ export default function QuoteForm(props: { compact?: boolean }) {
         </div>
         <div class="sm:col-span-2">
           <label class="label" for="q-item">Tour, vehicle, hotel or event</label>
-          <input id="q-item" class="field" placeholder="For example: Maasai Mara classic safari, or a wedding on 14 March" value={item()} onInput={e => setItem(e.currentTarget.value)} />
+          <input id="q-item" class="field" placeholder="For example: JKIA pick-up on 14 March, or a three-day Mara trip" value={item()} onInput={e => setItem(e.currentTarget.value)} />
         </div>
         <div>
           <label class="label" for="q-date">Date</label>
@@ -113,7 +116,7 @@ export default function QuoteForm(props: { compact?: boolean }) {
           Send by email instead
         </a>
       </div>
-      <p class="mt-3 text-sm text-slate">We reply with a written quote, usually the same day. No payment is taken on this site.</p>
+      <p class="mt-3 text-sm text-slate">The head of operations replies with a written quote, usually straight away. No payment is taken on this site.</p>
 
       <Show when={sent()}>
         <div class="mt-5 rounded-xl bg-sun p-4 text-sm" role="status">

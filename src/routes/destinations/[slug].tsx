@@ -35,10 +35,13 @@ export default function DestinationPage() {
             <div class="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
             <div class="wrap relative pt-24 pb-10">
               <p class="text-sm">
-                <A href="/destinations" class="underline underline-offset-4 hover:text-sun">
-                  Destinations
+                <A href="/fleet" class="underline underline-offset-4 hover:text-sun">
+                  Transport and transfers
                 </A>{" "}
-                <span aria-hidden="true">/</span> {d().country}
+                <span aria-hidden="true">/</span>{" "}
+                <A href="/destinations" class="underline underline-offset-4 hover:text-sun">
+                  Where we drive
+                </A>
               </p>
               <h1 class="display mt-4 text-5xl sm:text-6xl lg:text-7xl">{d().name}</h1>
               <p class="mt-4 max-w-2xl text-lg text-white/90">{d().tagline}</p>
@@ -59,8 +62,13 @@ export default function DestinationPage() {
                 <dd class="mt-1 font-semibold">{d().bestTime}</dd>
               </div>
               <div class="card p-6">
-                <dt class="text-sm text-slate">Getting there</dt>
+                <dt class="text-sm text-slate">Getting there with us</dt>
                 <dd class="mt-1 font-semibold">{d().driveTime}</dd>
+                <dd class="mt-4">
+                  <A href={`/quote?service=transport&item=${encodeURIComponent("Drive to " + d().name)}`} class="btn btn-sun btn-sm">
+                    Book a drive to {d().name}
+                  </A>
+                </dd>
               </div>
               <div class="card p-6">
                 <dt class="text-sm text-slate">Region</dt>
@@ -73,7 +81,7 @@ export default function DestinationPage() {
             <div class="wrap">
               <SectionHeading
                 title={`Trips to ${d().name}`}
-                intro={trips().length ? "Set departures and private versions of each." : "No set departure yet. We build this one to order."}
+                intro={trips().length ? "Private trips that include this destination, each quoted for your group." : "No sample trip yet. We build this one to order."}
                 action={
                   <A href={`/quote?service=tour&item=${encodeURIComponent(d().name)}`} class="btn btn-ink">
                     Plan a trip here
@@ -88,7 +96,7 @@ export default function DestinationPage() {
             </div>
           </section>
 
-          <CtaBand service="tour" />
+          <CtaBand title={`Heading to ${d().name}?`} body="Tell us the dates and how many of you. We quote the drive, with the driver's costs included, and add a trip or stay if you want one." service="transport" />
         </>
       )}
     </Show>

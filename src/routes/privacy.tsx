@@ -1,8 +1,9 @@
 import LegalPage from "~/components/LegalPage";
+import { site } from "~/data/site";
 
 export default function Privacy() {
   return (
-    <LegalPage title="Privacy" description="What Logantoz Tours collects when you enquire or book, and what we do with it.">
+    <LegalPage title="Privacy" description="What Talmar Express collects when you enquire or book, and what we do with it.">
       <h2>What we collect</h2>
       <p>When you request a quote we receive your name, phone number, email if you give it, and the details of the trip or event. When you book we also collect passport or ID details needed for park entry, lodges and permits, and any medical or dietary information you choose to share.</p>
       <h2>How we use it</h2>
@@ -14,7 +15,7 @@ export default function Privacy() {
       <h2>This website</h2>
       <p>The site does not use tracking cookies. The contact page embeds a Google Map, which may set cookies from Google. Photos of guests are published only with their permission.</p>
       <h2>Your rights</h2>
-      <p>Under the Data Protection Act 2019 you can ask what we hold about you, ask us to correct it, or ask us to delete it where we no longer need it. Write to logantoztour@gmail.com.</p>
+      <p>Under the Data Protection Act 2019 you can ask what we hold about you, ask us to correct it, or ask us to delete it where we no longer need it. Write to {site.email}.</p>
     </LegalPage>
   );
 }
